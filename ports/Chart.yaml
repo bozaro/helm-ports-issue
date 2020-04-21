@@ -1,0 +1,6 @@
+apiVersion: v2
+name: ports
+description: A example for perproduce ports issue
+type: application
+version: 0.1.0
+appVersion: 1.16.0

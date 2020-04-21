@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ports.fullname" . }}
+  labels:
+    {{- include "ports.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "ports.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "ports.selectorLabels" . | nindent 8 }}
+        app: "ports"
+    spec:
+      containers:
+        - name: "nginx"
+          image: "nginx:latest"
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            {{- .Values.ports | toYaml | nindent 12 }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http

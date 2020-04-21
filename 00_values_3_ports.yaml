@@ -1,0 +1,11 @@
+ports:
+- name: http
+  containerPort: 80
+  protocol: TCP
+- name: grpc-look-aside
+  containerPort: 8080
+  hostPort: 34567
+  protocol: TCP
+- name: grpc-service
+  containerPort: 8080
+  protocol: TCP
