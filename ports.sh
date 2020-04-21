@@ -8,6 +8,10 @@ run_test () {
 	helm upgrade --install ports ports --wait --values "${TEST}"
 
 	echo "## Test: $TEST"
+	echo "### VALUES"
+	echo '```'
+	cat "${TEST}"
+	echo '```'
 	echo "### EXPECTED"
 	echo '```'
 	helm template ports --values "${TEST}" | yq '.spec.template.spec.containers[].ports'
